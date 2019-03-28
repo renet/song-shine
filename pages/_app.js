@@ -1,8 +1,10 @@
 import App, { Container } from "next/app";
 import Head from "next/head";
-import { Provider } from "react-redux";
+import { connect, Provider } from "react-redux";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import theme from "styled-theming";
+
+import store from "../store";
 
 const backgroundColor = theme("mode", {
   light: "#fff",
@@ -18,8 +20,25 @@ const GlobalStyle = createGlobalStyle`
     }
   `;
 
-class MyApp extends App {
-  static async getInitialProps({ Component, router, ctx }) {
+const ThemeWrapper = ({ Component, pageProps, title, theme }) => (
+  <ThemeProvider theme={{ mode: theme }}>
+    <Container>
+      <GlobalStyle />
+      <Head>
+        <title>{title}</title>
+      </Head>
+      <Component {...pageProps} />
+    </Container>
+  </ThemeProvider>
+);
+const ConnectedThemeWrapper = connect(({ page }, props) => ({
+  ...props,
+  theme: page.theme,
+  title: page.title
+}))(ThemeWrapper);
+
+export default class extends App {
+  static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
 
     if (Component.getInitialProps) {
@@ -30,20 +49,10 @@ class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps, reduxStore } = this.props;
-    const { title } = pageProps;
     return (
-      <ThemeProvider theme={{ mode: "light" }}>
-        <Container>
-          <GlobalStyle />
-          <Head>
-            <title>{title}</title>
-          </Head>
-          <Component {...pageProps} />
-        </Container>
-      </ThemeProvider>
+      <Provider store={store}>
+        <ConnectedThemeWrapper {...this.props} />
+      </Provider>
     );
   }
 }
-
-export default MyApp;
