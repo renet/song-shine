@@ -3,8 +3,8 @@ import Head from "next/head";
 import { connect, Provider } from "react-redux";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import theme from "styled-theming";
-
 import store from "../store";
+import { init } from "../store/actions";
 
 const backgroundColor = theme("mode", {
   light: "#fff",
@@ -46,6 +46,30 @@ export default class extends App {
     }
 
     return { pageProps };
+  }
+
+  async componentDidMount() {
+    try {
+      const response = await fetch("http://localhost:3000/api/db/load");
+      const savedData = await response.json();
+
+      console.log("Restoring saved data.");
+      store.dispatch(init(savedData));
+    } catch (error) {
+      console.log("Error loading saved data. Using empty store instead.");
+    }
+
+    store.subscribe(() => {
+      const body = JSON.stringify(store.getState());
+
+      fetch("http://localhost:3000/api/db/save", {
+        body,
+        headers: {
+          "Content-Type": "application/json"
+        },
+        method: "PUT"
+      });
+    });
   }
 
   render() {
