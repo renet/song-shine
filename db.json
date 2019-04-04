@@ -1,7 +1,8 @@
 {
   "page": {
     "title": "Welcome",
-    "theme": "light"
+    "theme": "light",
+    "sidemenuOpen": true
   },
   "song": {}
 }

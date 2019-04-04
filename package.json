@@ -9,14 +9,16 @@
   "scripts": {
     "dev": "node server/index.js",
     "build": "next build",
-    "start": "next start -p ${PORT:-3000}"
+    "start": "NODE_DEV=production node server/index.js"
   },
   "dependencies": {
     "@material-ui/core": "^3.9.2",
+    "@material-ui/icons": "^3.0.2",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "lowdb": "^1.0.0",
     "next": "^8.0.3",
+    "prop-types": "^15.7.2",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
     "react-redux": "^6.0.1",

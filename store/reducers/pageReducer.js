@@ -3,11 +3,13 @@ import {
   setPageTitle,
   setPageType,
   setPageLoading,
-  setTheme
+  setTheme,
+  toggleSideMenu
 } from "../actions/pageActions";
 
 export default createReducer(
   {
+    sidemenuOpen: false,
     title: "Welcome",
     theme: "light"
   },
@@ -27,6 +29,10 @@ export default createReducer(
     [setPageLoading]: (state, { payload }) => ({
       ...state,
       loading: !!payload
+    }),
+    [toggleSideMenu]: (state, { payload }) => ({
+      ...state,
+      sidemenuOpen: !!payload
     })
   }
 );

@@ -2,6 +2,7 @@ import App, { Container } from "next/app";
 import Head from "next/head";
 import { connect, Provider } from "react-redux";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
+import Layout from "../components/common/Layout";
 import theme from "styled-theming";
 import store from "../store";
 import { init } from "../store/actions";
@@ -27,7 +28,9 @@ const ThemeWrapper = ({ Component, pageProps, title, theme }) => (
       <Head>
         <title>{title}</title>
       </Head>
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </Container>
   </ThemeProvider>
 );
