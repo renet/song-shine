@@ -3,6 +3,7 @@ import {
   setPageTitle,
   setPageType,
   setPageLoading,
+  setSelectedId,
   setTheme,
   toggleSideMenu
 } from "../actions/pageActions";
@@ -29,6 +30,10 @@ export default createReducer(
     [setPageLoading]: (state, { payload }) => ({
       ...state,
       loading: !!payload
+    }),
+    [setSelectedId]: (state, { payload }) => ({
+      ...state,
+      id: payload
     }),
     [toggleSideMenu]: (state, { payload }) => ({
       ...state,

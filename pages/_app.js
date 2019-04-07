@@ -2,10 +2,14 @@ import App, { Container } from "next/app";
 import Head from "next/head";
 import { connect, Provider } from "react-redux";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
-import Layout from "../components/common/Layout";
 import theme from "styled-theming";
 import store from "../store";
 import { init } from "../store/actions";
+import {
+  getPageTitle,
+  getSelectedId,
+  getTheme
+} from "../store/selectors/pageSelectors";
 
 const backgroundColor = theme("mode", {
   light: "#fff",
@@ -14,30 +18,29 @@ const backgroundColor = theme("mode", {
 
 const GlobalStyle = createGlobalStyle`
     body {
-      background: ${backgroundColor};
+      margin: 12px;
   
       @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
       @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
     }
   `;
 
-const ThemeWrapper = ({ Component, pageProps, title, theme }) => (
+const ThemeWrapper = ({ Component, pageId, pageProps, title, theme }) => (
   <ThemeProvider theme={{ mode: theme }}>
     <Container>
       <GlobalStyle />
       <Head>
         <title>{title}</title>
       </Head>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <Component {...pageProps} key={pageId} />
     </Container>
   </ThemeProvider>
 );
-const ConnectedThemeWrapper = connect(({ page }, props) => ({
+const ConnectedThemeWrapper = connect((state, props) => ({
   ...props,
-  theme: page.theme,
-  title: page.title
+  theme: getTheme(state),
+  title: getPageTitle(state),
+  pageId: getSelectedId(state)
 }))(ThemeWrapper);
 
 export default class extends App {
