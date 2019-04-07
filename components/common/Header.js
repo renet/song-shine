@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import Link from "next/link";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -9,8 +9,6 @@ import { fade } from "@material-ui/core/styles/colorManipulator";
 import { withStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
-import * as pageActions from "../../store/actions/pageActions";
-import { getPageTitle } from "../../store/selectors/pageSelectors";
 
 const styles = theme => ({
   root: {
@@ -24,6 +22,7 @@ const styles = theme => ({
     marginRight: 20
   },
   title: {
+    cursor: "pointer",
     display: "none",
     [theme.breakpoints.up("sm")]: {
       display: "block"
@@ -72,7 +71,7 @@ const styles = theme => ({
   }
 });
 
-const Header = ({ classes, title, toggleSideMenu }) => (
+const Header = ({ classes, title, toggleMenu }) => (
   <div className={classes.root}>
     <AppBar position="static">
       <Toolbar>
@@ -80,18 +79,22 @@ const Header = ({ classes, title, toggleSideMenu }) => (
           className={classes.menuButton}
           color="inherit"
           aria-label="Open drawer"
-          onClick={() => toggleSideMenu(true)}
+          onClick={() => {
+            toggleMenu(true);
+          }}
         >
           <MenuIcon />
         </IconButton>
-        <Typography
-          className={classes.title}
-          variant="h6"
-          color="inherit"
-          noWrap
-        >
-          {title}
-        </Typography>
+        <Link href="/">
+          <Typography
+            className={classes.title}
+            variant="h6"
+            color="inherit"
+            noWrap
+          >
+            {title}
+          </Typography>
+        </Link>
         <div className={classes.grow} />
         <div className={classes.search}>
           <div className={classes.searchIcon}>
@@ -114,7 +117,4 @@ Header.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default connect(
-  (state, props) => props,
-  { ...pageActions }
-)(withStyles(styles)(Header));
+export default withStyles(styles)(Header);

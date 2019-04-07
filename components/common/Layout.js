@@ -1,3 +1,4 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -19,21 +20,25 @@ const styles = theme => ({
 });
 
 /** Basic layout wrapping every content */
-const Layout = ({ children, classes, title }) => (
-  <div className={classes.root}>
-    <Head>
-      <title>{title}</title>
-    </Head>
-    <Grid container spacing={24} justify="center">
-      <Header title={title} />
-      <SideMenu />
-      {children}
-      <Fab className={classes.fab} color="primary">
-        <AddIcon />
-      </Fab>
-    </Grid>
-  </div>
-);
+const Layout = ({ children, classes, title }) => {
+  const [sideMenuOpen, toggleSideMenu] = useState(false);
+
+  return (
+    <div className={classes.root}>
+      <Head>
+        <title>{title} - Song Shine</title>
+      </Head>
+      <Grid container spacing={24} justify="center">
+        <Header toggleMenu={toggleSideMenu} title={title} />
+        <SideMenu open={sideMenuOpen} toggle={toggleSideMenu} />
+        {children}
+        <Fab className={classes.fab} color="primary">
+          <AddIcon />
+        </Fab>
+      </Grid>
+    </div>
+  );
+};
 
 Layout.propTypes = {
   /** Page content */

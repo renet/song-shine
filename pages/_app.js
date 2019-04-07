@@ -1,19 +1,9 @@
 import App, { Container } from "next/app";
 import { connect, Provider } from "react-redux";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
-import theme from "styled-theming";
 import store from "../store";
 import { init } from "../store/actions";
-import {
-  getPageTitle,
-  getSelectedId,
-  getTheme
-} from "../store/selectors/pageSelectors";
-
-const backgroundColor = theme("mode", {
-  light: "#fff",
-  dark: "#000"
-});
+import { getSelectedId, getTheme } from "../store/selectors/pageSelectors";
 
 const GlobalStyle = createGlobalStyle`
     body {
@@ -35,7 +25,6 @@ const ThemeWrapper = ({ Component, pageId, pageProps, theme }) => (
 const ConnectedThemeWrapper = connect((state, props) => ({
   ...props,
   theme: getTheme(state),
-  title: getPageTitle(state),
   pageId: getSelectedId(state)
 }))(ThemeWrapper);
 

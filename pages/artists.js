@@ -25,7 +25,7 @@ function renderList(artists) {
         </ListItemAvatar>
         <ListItemText primary={name} />
         <ListItemSecondaryAction>
-          <Link href={`/artist/${id}/edit`} key={id}>
+          <Link href={`/artist/${id}/edit`}>
             <IconButton aria-label="edit">
               <EditIcon />
             </IconButton>

@@ -2,14 +2,14 @@
   "name": "song-shine",
   "version": "1.0.0",
   "description": "Song presentation software",
-  "main": "index.js",
+  "main": "server.js",
   "repository": "https://git.heroku.com/song-shine.git",
   "author": "René Schubert <reneschubert@gmx.de>",
   "license": "MIT",
   "scripts": {
-    "dev": "node server/index.js",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "NODE_DEV=production node server/index.js"
+    "start": "NODE_DEV=production node server.js"
   },
   "dependencies": {
     "@material-ui/core": "^3.9.2",

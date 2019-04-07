@@ -28,7 +28,7 @@ function renderList(songs) {
           secondary={artists.reduce((prev, artist) => `${prev}, ${artist}`)}
         />
         <ListItemSecondaryAction>
-          <Link href={`/song/${id}/edit`} key={id}>
+          <Link href={`/song/${id}/edit`}>
             <IconButton aria-label="edit">
               <EditIcon />
             </IconButton>

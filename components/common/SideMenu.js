@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
+import Link from "next/link";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -13,71 +13,92 @@ import ListItemText from "@material-ui/core/ListItemText";
 import GradientIcon from "@material-ui/icons/Gradient";
 import SettingsIcon from "@material-ui/icons/Settings";
 import QueueMusicIcon from "@material-ui/icons/QueueMusic";
+import HomeIcon from "@material-ui/icons/Home";
 import PersonIcon from "@material-ui/icons/Person";
-import * as pageActions from "../../store/actions/pageActions";
 
 const styles = {
+  title: {
+    cursor: "pointer"
+  },
   list: {
     width: 250
   }
 };
 
-const SideMenu = ({ classes, sidemenuOpen, toggleSideMenu }) => (
+const SideMenu = ({ classes, open, toggle }) => (
   <SwipeableDrawer
-    open={sidemenuOpen}
+    open={open}
     onClose={() => {
-      toggleSideMenu(false);
+      toggle(false);
     }}
     onOpen={() => {
-      toggleSideMenu(true);
+      toggle(true);
     }}
   >
     <div
       tabIndex={0}
       role="button"
       onClick={() => {
-        toggleSideMenu(false);
+        toggle(false);
       }}
       onKeyDown={() => {
-        toggleSideMenu(false);
+        toggle(false);
       }}
     >
       <AppBar position="static" color="default">
         <Toolbar>
-          <Typography variant="h6" color="inherit">
-            Song Shine
-          </Typography>
+          <Link href="/">
+            <Typography variant="h6" color="inherit" className={classes.title}>
+              Song Shine
+            </Typography>
+          </Link>
         </Toolbar>
       </AppBar>
       <div className={classes.list}>
         <List>
-          <ListItem button key="songs">
-            <ListItemIcon>
-              <QueueMusicIcon />
-            </ListItemIcon>
-            <ListItemText primary="Songs" />
-          </ListItem>
-          <ListItem button key="artists">
-            <ListItemIcon>
-              <PersonIcon />
-            </ListItemIcon>
-            <ListItemText primary="Artists" />
-          </ListItem>
-          <ListItem button key="settings">
-            <ListItemIcon>
-              <GradientIcon />
-            </ListItemIcon>
-            <ListItemText primary="Backgrounds" />
-          </ListItem>
+          <Link href="/" key="home">
+            <ListItem button>
+              <ListItemIcon>
+                <HomeIcon />
+              </ListItemIcon>
+              <ListItemText primary="Home" />
+            </ListItem>
+          </Link>
+          <Link href="/songs" key="songs">
+            <ListItem button>
+              <ListItemIcon>
+                <QueueMusicIcon />
+              </ListItemIcon>
+              <ListItemText primary="Songs" />
+            </ListItem>
+          </Link>
+          <Link href="/artists">
+            <ListItem button>
+              <ListItemIcon>
+                <PersonIcon />
+              </ListItemIcon>
+              <ListItemText primary="Artists" />
+            </ListItem>
+          </Link>
+          <Link href="/backgrounds" key="backgrounds">
+            <ListItem button>
+              <ListItemIcon>
+                <GradientIcon />
+              </ListItemIcon>
+              <ListItemText primary="Backgrounds" />
+            </ListItem>
+          </Link>
         </List>
         <Divider />
         <List>
-          <ListItem button key="settings">
-            <ListItemIcon>
-              <SettingsIcon />
-            </ListItemIcon>
-            <ListItemText primary="Settings" />
-          </ListItem>
+          <Link href="/settings">
+            <ListItem button>
+              <ListItemIcon>
+                <SettingsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Settings" />
+            </ListItem>
+          </Link>
         </List>
       </div>
     </div>
@@ -88,7 +109,4 @@ SideMenu.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default connect(
-  ({ page }, props) => ({ ...props, sidemenuOpen: page.sidemenuOpen }),
-  { ...pageActions }
-)(withStyles(styles)(SideMenu));
+export default withStyles(styles)(SideMenu);

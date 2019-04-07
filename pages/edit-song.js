@@ -11,7 +11,6 @@ import MultiSelect from "../components/forms/MultiSelect";
 
 class EditSong extends Component {
   static async getInitialProps({ query }) {
-    console.log("initial");
     return {
       id: query.id
     };
@@ -58,7 +57,6 @@ class EditSong extends Component {
   saveChanges() {
     const { id, updateSongDetails, updateSongText } = this.props;
     const { artists, text, title, year } = this.state;
-    console.log("yu");
     updateSongDetails({
       id,
       details: { artists: artists.map(({ value }) => value), title, year }
@@ -146,17 +144,13 @@ class EditSong extends Component {
 }
 
 export default connect(
-  (state, props) => {
-    console.log("connect");
-
-    return {
-      ...props,
-      song: getAllSongs(state)[props.id] || {},
-      allArtists: Object.values(getAllArtists(state)).map(({ id, name }) => ({
-        value: id,
-        label: name
-      }))
-    };
-  },
+  (state, props) => ({
+    ...props,
+    song: getAllSongs(state)[props.id] || {},
+    allArtists: Object.values(getAllArtists(state)).map(({ id, name }) => ({
+      value: id,
+      label: name
+    }))
+  }),
   { ...musicActions }
 )(EditSong);
