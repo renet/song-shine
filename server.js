@@ -5,13 +5,14 @@ const PORT = process.env.PORT || 3000;
 const dev = process.env.NODE_DEV !== "production";
 const nextApp = next({ dev });
 const handle = nextApp.getRequestHandler();
+const routes = require("./routes");
 
 nextApp.prepare().then(() => {
   const app = express();
 
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
-  app.use("/api/db", require("./routes"));
+  app.use("/api/db", routes);
 
   app.get("/artist/:id/edit", (req, res) =>
     nextApp.render(req, res, "/edit-artist", { id: req.params.id })
