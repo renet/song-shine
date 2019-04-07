@@ -77,7 +77,6 @@ function inputComponent({ inputRef, ...props }) {
 function Control(props) {
   return (
     <TextField
-      error={console.log(props)}
       fullWidth
       InputProps={{
         inputComponent,
