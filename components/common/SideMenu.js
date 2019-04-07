@@ -2,13 +2,18 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
+import GradientIcon from "@material-ui/icons/Gradient";
+import SettingsIcon from "@material-ui/icons/Settings";
+import QueueMusicIcon from "@material-ui/icons/QueueMusic";
+import PersonIcon from "@material-ui/icons/Person";
 import * as pageActions from "../../store/actions/pageActions";
 
 const styles = {
@@ -37,27 +42,42 @@ const SideMenu = ({ classes, sidemenuOpen, toggleSideMenu }) => (
         toggleSideMenu(false);
       }}
     >
+      <AppBar position="static" color="gray">
+        <Toolbar>
+          <Typography variant="h6" color="inherit">
+            Song Shine
+          </Typography>
+        </Toolbar>
+      </AppBar>
       <div className={classes.list}>
         <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          <ListItem button key="songs">
+            <ListItemIcon>
+              <QueueMusicIcon />
+            </ListItemIcon>
+            <ListItemText primary="Songs" />
+          </ListItem>
+          <ListItem button key="artists">
+            <ListItemIcon>
+              <PersonIcon />
+            </ListItemIcon>
+            <ListItemText primary="Artists" />
+          </ListItem>
+          <ListItem button key="settings">
+            <ListItemIcon>
+              <GradientIcon />
+            </ListItemIcon>
+            <ListItemText primary="Backgrounds" />
+          </ListItem>
         </List>
         <Divider />
         <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          <ListItem button key="settings">
+            <ListItemIcon>
+              <SettingsIcon />
+            </ListItemIcon>
+            <ListItemText primary="Settings" />
+          </ListItem>
         </List>
       </div>
     </div>
