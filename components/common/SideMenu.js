@@ -42,7 +42,7 @@ const SideMenu = ({ classes, sidemenuOpen, toggleSideMenu }) => (
         toggleSideMenu(false);
       }}
     >
-      <AppBar position="static" color="gray">
+      <AppBar position="static" color="default">
         <Toolbar>
           <Typography variant="h6" color="inherit">
             Song Shine
