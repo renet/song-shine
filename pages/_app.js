@@ -1,32 +1,7 @@
 import App, { Container } from "next/app";
-import { connect, Provider } from "react-redux";
-import { ThemeProvider, createGlobalStyle } from "styled-components";
+import { Provider } from "react-redux";
 import store from "../store";
 import { init } from "../store/actions";
-import { getSelectedId, getTheme } from "../store/selectors/pageSelectors";
-
-const GlobalStyle = createGlobalStyle`
-    body {
-      margin: 12px;
-  
-      @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
-      @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
-    }
-  `;
-
-const ThemeWrapper = ({ Component, pageId, pageProps, theme }) => (
-  <ThemeProvider theme={{ mode: theme }}>
-    <Container>
-      <GlobalStyle />
-      <Component {...pageProps} key={pageId} />
-    </Container>
-  </ThemeProvider>
-);
-const ConnectedThemeWrapper = connect((state, props) => ({
-  ...props,
-  theme: getTheme(state),
-  pageId: getSelectedId(state)
-}))(ThemeWrapper);
 
 export default class extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -64,9 +39,13 @@ export default class extends App {
   }
 
   render() {
+    const { Component, pageProps } = this.props;
+
     return (
       <Provider store={store}>
-        <ConnectedThemeWrapper {...this.props} />
+        <Container>
+          <Component {...pageProps} />
+        </Container>
       </Provider>
     );
   }
