@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
 import page from "./pageReducer";
-import song from "./songReducer";
+import music from "./musicReducer";
 import { init } from "../actions";
 
 const rootReducer = combineReducers({
   page,
-  song
+  music
 });
 
 export default (state, action) => {

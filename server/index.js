@@ -13,6 +13,14 @@ nextApp.prepare().then(() => {
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use("/api/db", require("./routes"));
 
+  app.get("/artist/:id/edit", (req, res) =>
+    nextApp.render(req, res, "/edit-artist", { id: req.params.id })
+  );
+
+  app.get("/song/:id/edit", (req, res) =>
+    nextApp.render(req, res, "/edit-song", { id: req.params.id })
+  );
+
   app.get("*", (req, res) => {
     return handle(req, res);
   });

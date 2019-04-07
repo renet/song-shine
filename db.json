@@ -1,8 +1,27 @@
 {
   "page": {
-    "title": "Welcome",
+    "id": "7999a0cd-2932-4091-b6f0-be6aa95c85db",
+    "title": "Edit Song: This My Soul",
     "theme": "light",
-    "sidemenuOpen": true
+    "sidemenuOpen": false
   },
-  "song": {}
+  "music": {
+    "artists": {
+      "1d9b2cd4-6a38-4992-85e8-3875dbf4c613": {
+        "id": "1d9b2cd4-6a38-4992-85e8-3875dbf4c613",
+        "name": "The Gray Havens"
+      }
+    },
+    "songs": {
+      "7999a0cd-2932-4091-b6f0-be6aa95c85db": {
+        "artists": [
+          "1d9b2cd4-6a38-4992-85e8-3875dbf4c613"
+        ],
+        "id": "7999a0cd-2932-4091-b6f0-be6aa95c85db",
+        "title": "This My Soul",
+        "text": "A voice came and spoke to the silence\nThe words took on beauty and form\nThe form took its shape as a garden was born\nThen man from the dust came reflecting\nAll goodness and beauty and life\nBut he lowered his gaze\nAs he listened to the face of low desires\n\nThis my soul you were born\nYou were born into\nWhat this man has done\nIt all extends to you\nLet the words shake on down along your spine\nAnd ring out true that you might find new life\n\nThe voice came and swords blocked the garden\nNone could return with their lives\nA curse there was placed upon every man to face\nFor all of time\nNo wisdom of man or rebellion\nCould deliver new life out of death\nBut the voice with the curse\nSpoke a promise that the word would take on flesh\n\nThis my soul you were born\nYou were born into\nWhat this man has done\nIt all extends to you\nLet the words shake on down along your spine\nAnd ring out true that you might find\n\nThen the perfect son of man\nTook the place the voice had planned\nSince the garden and before\nHe took the swords and cursed the grave\nThere's nothing more to separate us from the promise\nThe words of a living hope\n\nAnd this my soul you were born\nYou were born into\nWhat this man has done\nIt all extends to you\nLet the words shake on down along your spine\nAnd ring out true that you might find",
+        "year": 2016
+      }
+    }
+  }
 }

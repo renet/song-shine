@@ -10,6 +10,7 @@ import { withStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import * as pageActions from "../../store/actions/pageActions";
+import { getPageTitle } from "../../store/selectors/pageSelectors";
 
 const styles = theme => ({
   root: {
@@ -71,7 +72,7 @@ const styles = theme => ({
   }
 });
 
-const Header = ({ classes, toggleSideMenu }) => (
+const Header = ({ classes, title, toggleSideMenu }) => (
   <div className={classes.root}>
     <AppBar position="static">
       <Toolbar>
@@ -80,7 +81,6 @@ const Header = ({ classes, toggleSideMenu }) => (
           color="inherit"
           aria-label="Open drawer"
           onClick={() => toggleSideMenu(true)}
-          onKeyDown={() => toggleSideMenu(true)}
         >
           <MenuIcon />
         </IconButton>
@@ -90,7 +90,7 @@ const Header = ({ classes, toggleSideMenu }) => (
           color="inherit"
           noWrap
         >
-          Material-UI
+          {title}
         </Typography>
         <div className={classes.grow} />
         <div className={classes.search}>
@@ -115,6 +115,6 @@ Header.propTypes = {
 };
 
 export default connect(
-  (state, props) => props,
+  (state, props) => ({ ...props, title: getPageTitle(state) }),
   { ...pageActions }
 )(withStyles(styles)(Header));
