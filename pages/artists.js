@@ -12,28 +12,25 @@ import MusicNoteIcon from "@material-ui/icons/MusicNote";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import Layout from "../components/common/Layout";
-import { getAllSongs } from "../store/selectors/musicSelectors";
+import { getAllArtists } from "../store/selectors/musicSelectors";
 
-function renderList(songs) {
-  return songs.map(({ artists, id, title }) => (
-    <Link href={`/song/${id}`} key={id}>
+function renderList(artists) {
+  return artists.map(({ id, name }) => (
+    <Link href={`/artist/${id}`} key={id}>
       <ListItem button>
         <ListItemAvatar>
           <Avatar>
             <MusicNoteIcon />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText
-          primary={title}
-          secondary={artists.reduce((prev, artist) => `${prev}, ${artist}`)}
-        />
+        <ListItemText primary={name} />
         <ListItemSecondaryAction>
-          <Link href={`/song/${id}/edit`} key={id}>
+          <Link href={`/artist/${id}/edit`} key={id}>
             <IconButton aria-label="edit">
               <EditIcon />
             </IconButton>
           </Link>
-          <IconButton aria-label="dalete">
+          <IconButton aria-label="delete">
             <DeleteIcon />
           </IconButton>
         </ListItemSecondaryAction>
@@ -42,15 +39,15 @@ function renderList(songs) {
   ));
 }
 
-const App = ({ songs }) => (
-  <Layout title="Songs">
+const App = ({ artists }) => (
+  <Layout title="Artists">
     <Grid item xs={12} sm={8}>
-      <List>{renderList(songs)}</List>
+      <List>{renderList(artists)}</List>
     </Grid>
   </Layout>
 );
 
 export default connect((state, props) => ({
   ...props,
-  songs: Object.values(getAllSongs(state))
+  artists: Object.values(getAllArtists(state))
 }))(App);
