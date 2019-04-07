@@ -86,6 +86,7 @@ class EditSong extends Component {
             </Grid>
             <Grid item xs={3}>
               <TextField
+                fullWidth
                 label="Year"
                 margin="normal"
                 onChange={this.handleYearChange}
