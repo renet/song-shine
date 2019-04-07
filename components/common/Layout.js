@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
+import Head from "next/head";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import Header from "./Header";
@@ -18,10 +19,13 @@ const styles = theme => ({
 });
 
 /** Basic layout wrapping every content */
-const Layout = ({ children, classes }) => (
+const Layout = ({ children, classes, title }) => (
   <div className={classes.root}>
+    <Head>
+      <title>{title}</title>
+    </Head>
     <Grid container spacing={24} justify="center">
-      <Header />
+      <Header title={title} />
       <SideMenu />
       {children}
       <Fab className={classes.fab} color="primary">

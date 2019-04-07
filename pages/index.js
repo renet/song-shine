@@ -16,7 +16,7 @@ const styles = {
 };
 
 const App = ({ classes }) => (
-  <Layout>
+  <Layout title="Welcome to Song Shine">
     <Grid item xs={12} sm={6} lg={4}>
       <Card>
         <CardActionArea>

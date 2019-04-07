@@ -11,6 +11,7 @@ import MultiSelect from "../components/forms/MultiSelect";
 
 class EditSong extends Component {
   static async getInitialProps({ query }) {
+    console.log("initial");
     return {
       id: query.id
     };
@@ -19,7 +20,7 @@ class EditSong extends Component {
   constructor(props) {
     super(props);
 
-    const { allArtists, setPageTitle, song } = props;
+    const { allArtists, song } = props;
     const { artists, text, title, year } = song;
 
     this.state = {
@@ -28,8 +29,6 @@ class EditSong extends Component {
       title,
       year
     };
-
-    setPageTitle(`Edit Song: ${song.title}`);
 
     this.handleArtistsChange = this.handleArtistsChange.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
@@ -68,12 +67,12 @@ class EditSong extends Component {
   }
 
   render() {
-    const { allArtists, theme } = this.props;
+    const { allArtists, song } = this.props;
 
     const { artists, text, title, year } = this.state;
 
     return (
-      <Layout>
+      <Layout title={`Edit Song: ${song.title}`}>
         <Grid item xs={12} sm={8}>
           <Grid container justify="flex-end" spacing={24}>
             <Grid item xs={9}>
@@ -146,13 +145,17 @@ class EditSong extends Component {
 }
 
 export default connect(
-  (state, props) => ({
-    ...props,
-    song: getAllSongs(state)[props.id] || {},
-    allArtists: Object.values(getAllArtists(state)).map(({ id, name }) => ({
-      value: id,
-      label: name
-    }))
-  }),
-  { ...pageActions, ...musicActions }
+  (state, props) => {
+    console.log("connect");
+
+    return {
+      ...props,
+      song: getAllSongs(state)[props.id] || {},
+      allArtists: Object.values(getAllArtists(state)).map(({ id, name }) => ({
+        value: id,
+        label: name
+      }))
+    };
+  },
+  { ...musicActions }
 )(EditSong);

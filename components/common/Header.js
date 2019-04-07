@@ -115,6 +115,6 @@ Header.propTypes = {
 };
 
 export default connect(
-  (state, props) => ({ ...props, title: getPageTitle(state) }),
+  (state, props) => props,
   { ...pageActions }
 )(withStyles(styles)(Header));

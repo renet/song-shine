@@ -1,5 +1,4 @@
 import App, { Container } from "next/app";
-import Head from "next/head";
 import { connect, Provider } from "react-redux";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import theme from "styled-theming";
@@ -25,13 +24,10 @@ const GlobalStyle = createGlobalStyle`
     }
   `;
 
-const ThemeWrapper = ({ Component, pageId, pageProps, title, theme }) => (
+const ThemeWrapper = ({ Component, pageId, pageProps, theme }) => (
   <ThemeProvider theme={{ mode: theme }}>
     <Container>
       <GlobalStyle />
-      <Head>
-        <title>{title}</title>
-      </Head>
       <Component {...pageProps} key={pageId} />
     </Container>
   </ThemeProvider>
