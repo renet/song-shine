@@ -16,7 +16,7 @@ import { getAllSongs } from "../store/selectors/musicSelectors";
 
 function renderList(songs) {
   return songs.map(({ artists, id, title }) => (
-    <Link href={`/song/${id}`} key={id}>
+    <Link href={`/song?id=${id}`} as={`/song/${id}`} key={id}>
       <ListItem button>
         <ListItemAvatar>
           <Avatar>
@@ -28,7 +28,7 @@ function renderList(songs) {
           secondary={artists.reduce((prev, artist) => `${prev}, ${artist}`)}
         />
         <ListItemSecondaryAction>
-          <Link href={`/song/${id}/edit`}>
+          <Link href={`/edit-song?id=${id}`} as={`/song/${id}/edit`}>
             <IconButton aria-label="edit">
               <EditIcon />
             </IconButton>

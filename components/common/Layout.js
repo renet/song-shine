@@ -16,6 +16,10 @@ const styles = theme => ({
     bottom: theme.spacing.unit * 2,
     position: "fixed",
     right: theme.spacing.unit * 2
+  },
+  grid: {
+    // Fix horizontal scrollbar issue
+    width: "calc(100% + 20px)"
   }
 });
 
@@ -28,7 +32,7 @@ const Layout = ({ children, classes, title }) => {
       <Head>
         <title>{title} - Song Shine</title>
       </Head>
-      <Grid container spacing={24} justify="center">
+      <Grid container spacing={24} justify="center" className={classes.grid}>
         <Header toggleMenu={toggleSideMenu} title={title} />
         <SideMenu open={sideMenuOpen} toggle={toggleSideMenu} />
         {children}
