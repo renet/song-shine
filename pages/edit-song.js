@@ -3,17 +3,22 @@ import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import * as pageActions from "../store/actions/pageActions";
+import { setSelectedId } from "../store/actions/pageActions";
 import * as musicActions from "../store/actions/musicActions";
-import { getAllArtists, getAllSongs } from "../store/selectors/musicSelectors";
+import {
+  getAllArtists,
+  getSelectedSong
+} from "../store/selectors/musicSelectors";
 import Layout from "../components/common/Layout";
 import MultiSelect from "../components/forms/MultiSelect";
 
 class EditSong extends Component {
-  static async getInitialProps({ query }) {
-    return {
-      id: query.id
-    };
+  static async getInitialProps({ store, query }) {
+    const { id } = query;
+
+    store.dispatch(setSelectedId(id));
+
+    return { id };
   }
 
   constructor(props) {
@@ -146,7 +151,7 @@ class EditSong extends Component {
 export default connect(
   (state, props) => ({
     ...props,
-    song: getAllSongs(state)[props.id] || {},
+    song: getSelectedSong(state),
     allArtists: Object.values(getAllArtists(state)).map(({ id, name }) => ({
       value: id,
       label: name

@@ -1,33 +1,13 @@
 import App, { Container } from "next/app";
 import getConfig from "next/config";
 import { Provider } from "react-redux";
-import store from "../store";
-import { init } from "../store/actions";
+import withReduxStore from "../lib/with-redux-store";
 
-const { publicRuntimeConfig } = getConfig();
-const { API_URL } = publicRuntimeConfig;
-
-export default class extends App {
-  static async getInitialProps({ Component, ctx }) {
-    let pageProps = {};
-
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
-    }
-
-    return { pageProps };
-  }
-
+class MyApp extends App {
   async componentDidMount() {
-    try {
-      const response = await fetch(`${API_URL}/load`);
-      const savedData = await response.json();
-
-      console.log("Restoring saved data.");
-      store.dispatch(init(savedData));
-    } catch (error) {
-      console.log("Error loading saved data. Using empty store instead.");
-    }
+    const { publicRuntimeConfig } = getConfig();
+    const { API_URL } = publicRuntimeConfig;
+    const { store } = this.props;
 
     store.subscribe(() => {
       const body = JSON.stringify(store.getState());
@@ -43,7 +23,7 @@ export default class extends App {
   }
 
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, store } = this.props;
 
     return (
       <Provider store={store}>
@@ -54,3 +34,5 @@ export default class extends App {
     );
   }
 }
+
+export default withReduxStore(MyApp);

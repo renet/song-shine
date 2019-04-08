@@ -3,15 +3,18 @@ import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import { setSelectedId } from "../store/actions/pageActions";
 import * as musicActions from "../store/actions/musicActions";
-import { getAllArtists } from "../store/selectors/musicSelectors";
+import { getSelectedArtist } from "../store/selectors/musicSelectors";
 import Layout from "../components/common/Layout";
 
 class EditArtist extends Component {
-  static async getInitialProps({ query }) {
-    return {
-      id: query.id
-    };
+  static async getInitialProps({ store, query }) {
+    const { id } = query;
+
+    store.dispatch(setSelectedId(id));
+
+    return { id };
   }
 
   constructor(props) {
@@ -73,7 +76,7 @@ export default connect(
   (state, props) => ({
     ...props,
     theme: state.page.theme,
-    artist: getAllArtists(state)[props.id] || {}
+    artist: getSelectedArtist(state)
   }),
   { ...musicActions }
 )(EditArtist);
