@@ -1,12 +1,11 @@
 import App, { Container } from "next/app";
+import getConfig from "next/config";
 import { Provider } from "react-redux";
 import store from "../store";
 import { init } from "../store/actions";
 
-const HOSTNAME = process.env.HOSTNAME || "localhost";
-const PORT = process.env.PORT || 3000;
-const PROTOCOL = process.env.PROTOCOL || "http";
-const API_URL = `${PROTOCOL}://${HOSTNAME}:${PORT}/api/db`;
+const { publicRuntimeConfig } = getConfig();
+const { API_URL } = publicRuntimeConfig;
 
 export default class extends App {
   static async getInitialProps({ Component, ctx }) {
