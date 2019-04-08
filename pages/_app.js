@@ -3,6 +3,11 @@ import { Provider } from "react-redux";
 import store from "../store";
 import { init } from "../store/actions";
 
+const HOSTNAME = process.env.HOSTNAME || "localhost";
+const PORT = process.env.PORT || 3000;
+const PROTOCOL = process.env.PROTOCOL || "http";
+const API_URL = `${PROTOCOL}://${HOSTNAME}:${PORT}/api/db`;
+
 export default class extends App {
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
@@ -16,7 +21,7 @@ export default class extends App {
 
   async componentDidMount() {
     try {
-      const response = await fetch("http://localhost:3000/api/db/load");
+      const response = await fetch(`${API_URL}/load`);
       const savedData = await response.json();
 
       console.log("Restoring saved data.");
@@ -28,7 +33,7 @@ export default class extends App {
     store.subscribe(() => {
       const body = JSON.stringify(store.getState());
 
-      fetch("http://localhost:3000/api/db/save", {
+      fetch(`${API_URL}/save`, {
         body,
         headers: {
           "Content-Type": "application/json"
