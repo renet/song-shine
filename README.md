@@ -2,7 +2,19 @@
 
 A simple app for managing and presenting your song texts.
 
+## TODOs
+
+This app is work-in-progress and thus most functionality hasn't been implemented, yet. These steps will follow:
+- Unit tests
+- Search
+- Add, edit and delete
+- Song presentation (verse by verse full-screen display)
+- Background management for storing pictures and videos to use during the song presentation
+- Settings dialog (speed, transitions, etc.)
+
 ## Installation
+
+<span style="color: red">Not possible, yet! Download manually and follow steps under "Usage".</span>
 
 Use the [Node.js package manager](https://nodejs.org/) to install Song Shine:
 
