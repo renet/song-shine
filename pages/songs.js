@@ -14,8 +14,8 @@ import EditIcon from "@material-ui/icons/Edit";
 import Layout from "../components/common/Layout";
 import { getAllSongs } from "../store/selectors/musicSelectors";
 
-function renderList(songs) {
-  return songs.map(({ artists, id, title }) => (
+const renderList = songs =>
+  songs.map(({ artists, id, title }) => (
     <Link href={`/song?id=${id}`} as={`/song/${id}`} key={id}>
       <ListItem button>
         <ListItemAvatar>
@@ -25,7 +25,9 @@ function renderList(songs) {
         </ListItemAvatar>
         <ListItemText
           primary={title}
-          secondary={artists.reduce((prev, artist) => `${prev}, ${artist}`)}
+          secondary={artists
+            .map(({ name }) => name)
+            .reduce((prev, name) => `${prev}, ${name}`)}
         />
         <ListItemSecondaryAction>
           <Link href={`/edit-song?id=${id}`} as={`/song/${id}/edit`}>
@@ -40,7 +42,6 @@ function renderList(songs) {
       </ListItem>
     </Link>
   ));
-}
 
 const App = ({ songs }) => (
   <Layout title="Songs">
@@ -52,5 +53,5 @@ const App = ({ songs }) => (
 
 export default connect((state, props) => ({
   ...props,
-  songs: Object.values(getAllSongs(state))
+  songs: getAllSongs(state)
 }))(App);

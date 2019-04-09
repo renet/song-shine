@@ -6,13 +6,13 @@ A simple app for managing and presenting your song texts.
 
 Use the [Node.js package manager](https://nodejs.org/) to install Song Shine:
 
-```bash
+```sh
 npm install song-shine
 ```
 
 Or use [Yarn](https://yarnpkg.com/):
 
-```bash
+```sh
 yarn add song-shine
 ```
 
@@ -20,7 +20,7 @@ yarn add song-shine
 
 Start the Song Shine app with the following commands:
 
-```bash
+```sh
 npm run build
 npm start
 

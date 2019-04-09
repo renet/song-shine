@@ -49,5 +49,5 @@ const App = ({ artists }) => (
 
 export default connect((state, props) => ({
   ...props,
-  artists: Object.values(getAllArtists(state))
+  artists: getAllArtists(state)
 }))(App);
