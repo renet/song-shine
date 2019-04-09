@@ -13,10 +13,11 @@ This app is work-in-progress and thus most functionality hasn't been implemented
 - Song presentation (verse by verse full-screen display)
 - Background management for storing pictures and videos to use during the song presentation
 - Settings dialog (speed, transitions, etc.)
+- Unique design
 
 ## Installation
 
-<span style="color: red">Not possible, yet! Download manually and follow steps under "Usage".</span>
+Not possible, yet! Download and install manually and follow steps under "Usage".
 
 Use the [Node.js package manager](https://nodejs.org/) to install Song Shine:
 
