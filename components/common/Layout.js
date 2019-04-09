@@ -19,7 +19,8 @@ const styles = theme => ({
   },
   grid: {
     // Fix horizontal scrollbar issue
-    width: "calc(100% + 20px)"
+    margin: 0,
+    width: "100%"
   }
 });
 
@@ -28,19 +29,19 @@ const Layout = ({ children, classes, title }) => {
   const [sideMenuOpen, toggleSideMenu] = useState(false);
 
   return (
-    <div className={classes.root}>
+    <>
       <Head>
         <title>{title} - Song Shine</title>
       </Head>
+      <Header toggleMenu={toggleSideMenu} title={title} />
       <Grid container spacing={24} justify="center" className={classes.grid}>
-        <Header toggleMenu={toggleSideMenu} title={title} />
         <SideMenu open={sideMenuOpen} toggle={toggleSideMenu} />
         {children}
         <Fab className={classes.fab} color="primary">
           <AddIcon />
         </Fab>
       </Grid>
-    </div>
+    </>
   );
 };
 
