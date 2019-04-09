@@ -2,6 +2,8 @@
 
 A simple app for managing and presenting your song texts.
 
+Demo: https://song-shine.herokuapp.com
+
 ## TODOs
 
 This app is work-in-progress and thus most functionality hasn't been implemented, yet. These steps will follow:
@@ -30,16 +32,14 @@ yarn add song-shine
 
 ## Usage
 
-Start the Song Shine app with the following commands:
+Start the Song Shine app locally with the following command:
 
 ```sh
-npm run build
-npm start
+npm run dev
 
 # or
 
-yarn build
-yarn start
+yarn dev
 ```
 
 ## Contributing
