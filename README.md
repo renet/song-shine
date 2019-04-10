@@ -8,13 +8,15 @@ Demo: https://song-shine.herokuapp.com
 
 This app is work-in-progress and thus most functionality hasn't been implemented, yet. These steps will follow:
 
-- Unit tests
+- Unit and snaoshot tests with jest
+- Prop type definitions
 - Search
-- Add and delete songs and artists
-- Show artist and song details (editing already works)
+- Add and delete songs and artists (editing already works)
+- Show artist and song details
 - Song presentation (verse by verse full-screen display)
 - Background management for storing pictures and videos to use during the song presentation
 - Settings dialog (speed, transitions, etc.)
+- Documentation
 - Unique design
 
 ## Installation
