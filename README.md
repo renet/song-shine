@@ -7,9 +7,11 @@ Demo: https://song-shine.herokuapp.com
 ## TODOs
 
 This app is work-in-progress and thus most functionality hasn't been implemented, yet. These steps will follow:
+
 - Unit tests
 - Search
-- Add, edit and delete
+- Add and delete songs and artists
+- Show artist and song details (editing already works)
 - Song presentation (verse by verse full-screen display)
 - Background management for storing pictures and videos to use during the song presentation
 - Settings dialog (speed, transitions, etc.)
@@ -44,9 +46,11 @@ yarn dev
 ```
 
 ## Contributing
+
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
 ## License
+
 [MIT](https://choosealicense.com/licenses/mit/)
