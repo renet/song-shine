@@ -42,6 +42,7 @@ class EditArtist extends Component {
   render() {
     const { artist } = this.props;
     const { name } = this.state;
+
     return (
       <Layout title={`Edit Artist: ${artist.name}`}>
         <Grid item xs={12} sm={8}>

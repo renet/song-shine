@@ -28,6 +28,10 @@ nextApp.prepare().then(() => {
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use("/api/db", routes);
 
+  app.get("/artist/:id", (req, res) =>
+    nextApp.render(req, res, "/artist", { id: req.params.id })
+  );
+
   app.get("/artist/:id/edit", (req, res) =>
     nextApp.render(req, res, "/edit-artist", { id: req.params.id })
   );

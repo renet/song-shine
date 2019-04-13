@@ -29,3 +29,11 @@ export const getSelectedSong = createSelector(
     return songs[id] || {};
   }
 );
+export const getSongsBySelectedArtist = createSelector(
+  [getAllSongs, getSelectedArtist],
+  (songs, artist) => {
+    return songs.filter(({ artists }) =>
+      artists.map(({ id }) => id).includes(artist.id)
+    );
+  }
+);

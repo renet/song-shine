@@ -71,7 +71,6 @@ class EditSong extends Component {
 
   render() {
     const { allArtists, song } = this.props;
-
     const { artists, text, title, year } = this.state;
 
     return (
