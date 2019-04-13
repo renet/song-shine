@@ -8,7 +8,7 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
-import MusicNoteIcon from "@material-ui/icons/MusicNote";
+import FaceIcon from "@material-ui/icons/Face";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import Layout from "../components/common/Layout";
@@ -20,7 +20,7 @@ function renderList(artists) {
       <ListItem button>
         <ListItemAvatar>
           <Avatar>
-            <MusicNoteIcon />
+            <FaceIcon />
           </Avatar>
         </ListItemAvatar>
         <ListItemText primary={name} />
