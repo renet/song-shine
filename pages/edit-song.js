@@ -24,11 +24,11 @@ class EditSong extends Component {
   constructor(props) {
     super(props);
 
-    const { allArtists, song } = props;
+    const { song } = props;
     const { artists, text, title, year } = song;
 
     this.state = {
-      artists: allArtists.filter(artist => artists.includes(artist.value)),
+      artists: artists.map(({ id, name }) => ({ label: name, value: id })),
       text,
       title,
       year
@@ -151,7 +151,7 @@ export default connect(
   (state, props) => ({
     ...props,
     song: getSelectedSong(state),
-    allArtists: Object.values(getAllArtists(state)).map(({ id, name }) => ({
+    allArtists: getAllArtists(state).map(({ id, name }) => ({
       value: id,
       label: name
     }))
