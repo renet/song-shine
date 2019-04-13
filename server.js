@@ -36,6 +36,10 @@ nextApp.prepare().then(() => {
     nextApp.render(req, res, "/edit-artist", { id: req.params.id })
   );
 
+  app.get("/song/:id", (req, res) =>
+    nextApp.render(req, res, "/song", { id: req.params.id })
+  );
+
   app.get("/song/:id/edit", (req, res) =>
     nextApp.render(req, res, "/edit-song", { id: req.params.id })
   );
