@@ -115,8 +115,11 @@ class EditSong extends Component {
             </Grid>
             <Grid item xs={12}>
               <MultiSelect
+                formatCreateLabel={inputValue =>
+                  `Add "${inputValue}" as new artist.`
+                }
                 label="Artists"
-                noOptionsMessage={({ inputValue }) => {
+                noOptionsMessage={() => {
                   const { artists } = this.state;
 
                   if (artists.length) {

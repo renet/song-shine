@@ -21,10 +21,10 @@ const styles = theme => ({
     padding: 0
   },
   valueContainer: {
-    display: "flex",
-    flexWrap: "wrap",
-    flex: 1,
     alignItems: "center",
+    display: "flex",
+    flex: 1,
+    flexWrap: "wrap",
     overflow: "hidden"
   },
   chip: {
@@ -45,24 +45,24 @@ const styles = theme => ({
     fontSize: 16
   },
   placeholder: {
-    position: "absolute",
+    fontSize: 16,
     left: 2,
-    fontSize: 16
+    position: "absolute"
   },
   paper: {
-    position: "absolute",
-    zIndex: 1,
-    marginTop: theme.spacing.unit,
     left: 0,
-    right: 0
+    marginTop: theme.spacing.unit,
+    position: "absolute",
+    right: 0,
+    zIndex: 1
   }
 });
 
 function NoOptionsMessage(props) {
   return (
     <Typography
-      color="textSecondary"
       className={props.selectProps.classes.noOptionsMessage}
+      color="textSecondary"
       {...props.innerProps}
     >
       {props.children}
@@ -81,15 +81,15 @@ function Control(props) {
       InputProps={{
         inputComponent,
         inputProps: {
+          children: props.children,
           className: props.selectProps.classes.input,
           inputRef: props.innerRef,
-          children: props.children,
           ...props.innerProps
         }
       }}
-      {...props.selectProps.textFieldProps}
       margin="normal"
       required
+      {...props.selectProps.textFieldProps}
     />
   );
 }
@@ -98,8 +98,8 @@ function Option(props) {
   return (
     <MenuItem
       buttonRef={props.innerRef}
-      selected={props.isFocused}
       component="div"
+      selected={props.isFocused}
       style={{
         fontWeight: props.isSelected ? 500 : 400
       }}
@@ -113,8 +113,8 @@ function Option(props) {
 function Placeholder(props) {
   return (
     <Typography
-      color="textSecondary"
       className={props.selectProps.classes.placeholder}
+      color="textSecondary"
       {...props.innerProps}
     >
       {props.children}
@@ -144,13 +144,13 @@ function ValueContainer(props) {
 function MultiValue(props) {
   return (
     <Chip
-      tabIndex={-1}
-      label={props.children}
       className={classNames(props.selectProps.classes.chip, {
         [props.selectProps.classes.chipFocused]: props.isFocused
       })}
-      onDelete={props.removeProps.onClick}
       deleteIcon={<CancelIcon {...props.removeProps} />}
+      label={props.children}
+      onDelete={props.removeProps.onClick}
+      tabIndex={-1}
     />
   );
 }
@@ -158,8 +158,8 @@ function MultiValue(props) {
 function Menu(props) {
   return (
     <Paper
-      square
       className={props.selectProps.classes.paper}
+      square
       {...props.innerProps}
     >
       {props.children}
@@ -181,6 +181,7 @@ const components = {
 /** Basic layout wrapping every content */
 const MultiSelect = ({
   classes,
+  formatCreateLabel,
   label,
   noOptionsMessage,
   onChange,
@@ -207,7 +208,7 @@ const MultiSelect = ({
       isClearable={false}
       isMulti
       noOptionsMessage={noOptionsMessage}
-      formatCreateLabel={inputValue => <>Add "{inputValue}" as new artist.</>}
+      formatCreateLabel={formatCreateLabel}
       onChange={onChange}
       onCreateOption={onCreateOption}
       options={options}
