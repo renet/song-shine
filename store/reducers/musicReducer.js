@@ -41,10 +41,10 @@ export default createReducer(
 
       if (songArtists) {
         const existingArtists = songArtists
-          .filter(({ id }) => id)
+          .filter(({ id, name }) => id !== name)
           .map(({ id }) => id);
         const newArtists = songArtists
-          .filter(({ id }) => !id)
+          .filter(({ id, name }) => id === name)
           .map(({ name }) => {
             const newId = uuidv4();
 

@@ -50,7 +50,7 @@ class EditSong extends Component {
 
   handleArtistCreate(name) {
     this.setState(({ artists }) => {
-      artists.push({ label: name });
+      artists.push({ label: name, value: name });
 
       return { artists };
     });
