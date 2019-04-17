@@ -34,6 +34,7 @@ class EditSong extends Component {
       year
     };
 
+    this.handleArtistCreate = this.handleArtistCreate.bind(this);
     this.handleArtistsChange = this.handleArtistsChange.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleTitleChange = this.handleTitleChange.bind(this);
@@ -44,6 +45,14 @@ class EditSong extends Component {
   handleArtistsChange(value) {
     this.setState({
       artists: value
+    });
+  }
+
+  handleArtistCreate(name) {
+    this.setState(({ artists }) => {
+      artists.push({ label: name });
+
+      return { artists };
     });
   }
 
@@ -62,9 +71,17 @@ class EditSong extends Component {
   saveChanges() {
     const { id, updateSongDetails, updateSongText } = this.props;
     const { artists, text, title, year } = this.state;
+
     updateSongDetails({
       id,
-      details: { artists: artists.map(({ value }) => value), title, year }
+      details: {
+        artists: artists.map(({ value, label }) => ({
+          id: value,
+          name: label
+        })),
+        title,
+        year
+      }
     });
     updateSongText({ id, text });
   }
@@ -98,16 +115,9 @@ class EditSong extends Component {
             </Grid>
             <Grid item xs={12}>
               <MultiSelect
+                label="Artists"
                 noOptionsMessage={({ inputValue }) => {
                   const { artists } = this.state;
-
-                  if (inputValue) {
-                    return (
-                      <>
-                        No artist found for <strong>{inputValue}</strong>.
-                      </>
-                    );
-                  }
 
                   if (artists.length) {
                     return "No other artists available.";
@@ -116,7 +126,9 @@ class EditSong extends Component {
                   return "You haven't added any artists to the database, yet.";
                 }}
                 onChange={this.handleArtistsChange}
+                onCreateOption={this.handleArtistCreate}
                 options={allArtists}
+                placeholder="Select one or more artists..."
                 value={artists}
               />
             </Grid>

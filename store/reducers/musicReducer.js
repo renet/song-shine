@@ -30,17 +30,30 @@ export default createReducer(
 
       songs[id] = { ...songs[payload], id };
     },
-    [updateSongDetails]: ({ songs }, { payload }) => {
+    [updateSongDetails]: ({ songs, artists }, { payload }) => {
       const { details, id } = payload;
-      const { title, artists, year } = details;
+      const { title, artists: songArtists, year } = details;
       const song = songs[id];
 
       if (title) {
         song.title = title;
       }
 
-      if (artists) {
-        song.artists = artists;
+      if (songArtists) {
+        const existingArtists = songArtists
+          .filter(({ id }) => id)
+          .map(({ id }) => id);
+        const newArtists = songArtists
+          .filter(({ id }) => !id)
+          .map(({ name }) => {
+            const newId = uuidv4();
+
+            artists[newId] = { id: newId, name };
+
+            return newId;
+          });
+
+        song.artists = [...existingArtists, ...newArtists];
       }
 
       if (year) {

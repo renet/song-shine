@@ -8,7 +8,7 @@ Demo: https://song-shine.herokuapp.com
 
 This app is work-in-progress and thus most functionality hasn't been implemented, yet. These steps will follow:
 
-- Unit and snaoshot tests with jest
+- Unit and snapshot tests with jest
 - Prop type definitions
 - Search
 - Add and delete songs and artists (editing already works)

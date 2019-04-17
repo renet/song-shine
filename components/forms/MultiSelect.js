@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import Select from "react-select";
+import Creatable from "react-select/lib/Creatable";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import { emphasize } from "@material-ui/core/styles/colorManipulator";
@@ -181,9 +181,12 @@ const components = {
 /** Basic layout wrapping every content */
 const MultiSelect = ({
   classes,
+  label,
   noOptionsMessage,
   onChange,
+  onCreateOption,
   options,
+  placeholder,
   theme,
   value
 }) => {
@@ -198,18 +201,20 @@ const MultiSelect = ({
   };
 
   return (
-    <Select
+    <Creatable
       classes={classes}
       components={components}
       isClearable={false}
       isMulti
       noOptionsMessage={noOptionsMessage}
+      formatCreateLabel={inputValue => <>Add "{inputValue}" as new artist.</>}
       onChange={onChange}
+      onCreateOption={onCreateOption}
       options={options}
-      placeholder="Select one or more artists..."
+      placeholder={placeholder}
       styles={selectStyles}
       textFieldProps={{
-        label: "Artists",
+        label,
         InputLabelProps: {
           shrink: true
         }
