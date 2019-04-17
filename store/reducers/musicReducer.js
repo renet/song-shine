@@ -40,20 +40,17 @@ export default createReducer(
       }
 
       if (songArtists) {
-        const existingArtists = songArtists
-          .filter(({ id, name }) => id !== name)
-          .map(({ id }) => id);
-        const newArtists = songArtists
-          .filter(({ id, name }) => id === name)
-          .map(({ name }) => {
+        song.artists = songArtists.map(({ id, name }) => {
+          if (id === name) {
             const newId = uuidv4();
 
             artists[newId] = { id: newId, name };
 
             return newId;
-          });
+          }
 
-        song.artists = [...existingArtists, ...newArtists];
+          return id;
+        });
       }
 
       if (year) {
