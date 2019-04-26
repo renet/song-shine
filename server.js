@@ -8,7 +8,7 @@ const user = process.env.AUTH_USER;
 const password = process.env.AUTH_PASSWORD;
 const nextApp = next({ dev });
 const handle = nextApp.getRequestHandler();
-const routes = require("./routes");
+const api = require("./api");
 
 nextApp.prepare().then(() => {
   const app = express();
@@ -26,7 +26,7 @@ nextApp.prepare().then(() => {
   }
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
-  app.use("/api/db", routes);
+  app.use("/api/db", api);
 
   app.get("/artist/:id", (req, res) =>
     nextApp.render(req, res, "/artist", { id: req.params.id })
