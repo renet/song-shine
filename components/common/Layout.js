@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
+import Link from "next/link";
 import Grid from "@material-ui/core/Grid";
 import Head from "next/head";
 import Fab from "@material-ui/core/Fab";
@@ -37,9 +38,11 @@ const Layout = ({ children, classes, title }) => {
       <Grid container spacing={24} justify="center" className={classes.grid}>
         <SideMenu open={sideMenuOpen} toggle={toggleSideMenu} />
         {children}
-        <Fab className={classes.fab} color="primary">
-          <AddIcon />
-        </Fab>
+        <Link href="/edit-song" as="/song/new">
+          <Fab className={classes.fab} color="primary" title="Add song">
+            <AddIcon />
+          </Fab>
+        </Link>
       </Grid>
     </>
   );

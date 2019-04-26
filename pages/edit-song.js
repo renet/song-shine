@@ -1,5 +1,7 @@
 import { Component } from "react";
 import { connect } from "react-redux";
+import Router from "next/router";
+import uuidv4 from "uuid/v4";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -15,24 +17,34 @@ import MultiSelect from "../components/forms/MultiSelect";
 class EditSong extends Component {
   static async getInitialProps({ store, query }) {
     const { id } = query;
+    const addNew = !id;
+    const selectedId = id || uuidv4();
 
+    // If a new ID is created, unset selected ID.
     store.dispatch(setSelectedId(id));
 
-    return { id };
+    return { addNew, id: selectedId };
   }
 
   constructor(props) {
     super(props);
 
-    const { song } = props;
-    const { artists, text, title, year } = song;
+    const { addNew, song } = props;
 
-    this.state = {
-      artists: artists.map(({ id, name }) => ({ label: name, value: id })),
-      text,
-      title,
-      year
-    };
+    if (addNew) {
+      this.state = {
+        artists: []
+      };
+    } else {
+      const { artists, text, title, year } = song;
+
+      this.state = {
+        artists: artists.map(({ id, name }) => ({ label: name, value: id })),
+        text,
+        title,
+        year
+      };
+    }
 
     this.handleArtistCreate = this.handleArtistCreate.bind(this);
     this.handleArtistsChange = this.handleArtistsChange.bind(this);
@@ -69,35 +81,54 @@ class EditSong extends Component {
   }
 
   saveChanges() {
-    const { id, updateSongDetails, updateSongText } = this.props;
-    const { artists, text, title, year } = this.state;
-
-    updateSongDetails({
+    const {
+      addNew,
+      addSong,
       id,
-      details: {
-        artists: artists.map(({ value, label }) => ({
-          id: value,
-          name: label
-        })),
+      updateSongDetails,
+      updateSongText
+    } = this.props;
+    const { artists, text, title, year } = this.state;
+    const mappedArtists = artists.map(({ value, label }) => ({
+      id: value,
+      name: label
+    }));
+
+    if (addNew) {
+      addSong({
+        artists: mappedArtists,
+        id,
+        text,
         title,
         year
-      }
-    });
-    updateSongText({ id, text });
+      });
+
+      Router.push(`/edit-song?id=${id}`, `/song/${id}/edit`);
+    } else {
+      updateSongDetails({
+        id,
+        details: {
+          artists: mappedArtists,
+          title,
+          year
+        }
+      });
+      updateSongText({ id, text });
+    }
   }
 
   render() {
-    const { allArtists, song } = this.props;
+    const { addNew, allArtists, song } = this.props;
     const { artists, text, title, year } = this.state;
 
     return (
-      <Layout title={`Edit Song: ${song.title}`}>
+      <Layout title={addNew ? "New Song" : `Edit Song: ${song.title}`}>
         <Grid item xs={12} sm={8}>
           <Grid container justify="flex-end" spacing={24}>
             <Grid item xs={9}>
               <TextField
                 fullWidth
-                label="Song Title"
+                label="Song title"
                 margin="normal"
                 onChange={this.handleTitleChange}
                 value={title}
@@ -165,11 +196,11 @@ class EditSong extends Component {
 export default connect(
   (state, props) => ({
     ...props,
-    song: getSelectedSong(state),
     allArtists: getAllArtists(state).map(({ id, name }) => ({
       value: id,
       label: name
-    }))
+    })),
+    song: getSelectedSong(state)
   }),
   { ...musicActions }
 )(EditSong);

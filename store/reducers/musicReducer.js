@@ -11,16 +11,34 @@ import {
   updateSongText
 } from "../actions/musicActions";
 
+const addCreatedArtists = (allArtists, songArtists) =>
+  songArtists.map(({ id, name }) => {
+    if (id === name) {
+      const newId = uuidv4();
+
+      allArtists[newId] = { id: newId, name };
+
+      return newId;
+    }
+
+    return id;
+  });
+
 export default createReducer(
   {
     artists: {},
     songs: {}
   },
   {
-    [addSong]: ({ songs }, { payload }) => {
-      const id = uuidv4();
+    [addSong]: ({ artists, songs }, { payload }) => {
+      const { id, artists: songArtists } = payload;
+      const song = { ...payload };
 
-      songs[id] = { ...payload, id };
+      if (songArtists) {
+        song.artists = addCreatedArtists(artists, songArtists);
+      }
+
+      songs[id] = song;
     },
     [deleteSong]: ({ songs }, { payload }) => {
       delete songs[payload];
@@ -40,17 +58,7 @@ export default createReducer(
       }
 
       if (songArtists) {
-        song.artists = songArtists.map(({ id, name }) => {
-          if (id === name) {
-            const newId = uuidv4();
-
-            artists[newId] = { id: newId, name };
-
-            return newId;
-          }
-
-          return id;
-        });
+        song.artists = addCreatedArtists(artists, songArtists);
       }
 
       if (year) {
