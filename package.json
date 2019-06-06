@@ -18,7 +18,7 @@
     "body-parser": "^1.18.3",
     "classnames": "^2.2.6",
     "express": "^4.16.4",
-    "express-basic-auth": "^1.1.6",
+    "express-basic-auth": "^1.1.7",
     "isomorphic-unfetch": "^3.0.0",
     "jss": "^9.8.7",
     "lowdb": "^1.0.0",
