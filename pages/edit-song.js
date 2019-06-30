@@ -220,7 +220,7 @@ EditSong.propTypes = {
     /** Song title */
     title: PropTypes.string.isRequired,
     /** Publication year of the song */
-    year: propTypes.number.isRequired
+    year: PropTypes.number.isRequired
   }).isRequired,
   /** Song ID */
   id: PropTypes.string.isRequired,

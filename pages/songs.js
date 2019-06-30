@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import { getAllSongs } from "../store/selectors/musicSelectors";
@@ -12,7 +13,7 @@ const Songs = ({ songs }) => (
   </Layout>
 );
 
-Artists.propTypes = {
+Songs.propTypes = {
   /** List of songs */
   songs: PropTypes.arrayOf(
     PropTypes.shape({

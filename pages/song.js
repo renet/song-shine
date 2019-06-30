@@ -127,11 +127,11 @@ Song.propTypes = {
       name: PropTypes.string.isRequired
     }).isRequired,
     /** Song lyrics */
-    text,
+    text: PropTypes.string.isRequired,
     /** Song title */
-    title,
+    title: PropTypes.string.isRequired,
     /** Publication year of the song */
-    year
+    year: PropTypes.number.isRequired
   }).isRequired,
   /** Function to update current song details in state */
   updateSongDetails: PropTypes.func.isRequired,

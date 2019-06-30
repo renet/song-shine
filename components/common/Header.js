@@ -28,48 +28,44 @@ const styles = theme => ({
       display: "block"
     }
   },
-  search: {
-    wrapper: {
-      position: "relative",
-      borderRadius: theme.shape.borderRadius,
-      backgroundColor: fade(theme.palette.common.white, 0.15),
-      "&:hover": {
-        backgroundColor: fade(theme.palette.common.white, 0.25)
-      },
-      marginLeft: 0,
-      width: "100%",
-      [theme.breakpoints.up("sm")]: {
-        marginLeft: theme.spacing.unit,
-        width: "auto"
-      }
+  searchWrapper: {
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    "&:hover": {
+      backgroundColor: fade(theme.palette.common.white, 0.25)
     },
-    icon: {
-      width: theme.spacing.unit * 9,
-      height: "100%",
-      position: "absolute",
-      pointerEvents: "none",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center"
-    },
-    input: {
-      root: {
-        color: "inherit",
-        width: "100%"
-      },
-      input: {
-        paddingTop: theme.spacing.unit,
-        paddingRight: theme.spacing.unit,
-        paddingBottom: theme.spacing.unit,
-        paddingLeft: theme.spacing.unit * 10,
-        transition: theme.transitions.create("width"),
-        width: "100%",
-        [theme.breakpoints.up("sm")]: {
-          width: 120,
-          "&:focus": {
-            width: 200
-          }
-        }
+    marginLeft: 0,
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: theme.spacing.unit,
+      width: "auto"
+    }
+  },
+  searchIcon: {
+    width: theme.spacing.unit * 9,
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  searchRoot: {
+    color: "inherit",
+    width: "100%"
+  },
+  searchInput: {
+    paddingTop: theme.spacing.unit,
+    paddingRight: theme.spacing.unit,
+    paddingBottom: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit * 10,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: 120,
+      "&:focus": {
+        width: 200
       }
     }
   }
@@ -100,11 +96,17 @@ const Header = ({ classes, title, toggleMenu }) => (
           </Typography>
         </Link>
         <div className={classes.grow} />
-        <div className={classes.search.wrapper}>
-          <div className={classes.search.icon}>
+        <div className={classes.searchWrapper}>
+          <div className={classes.searchIcon}>
             <SearchIcon />
           </div>
-          <InputBase placeholder="Search…" classes={classes.search.input} />
+          <InputBase
+            placeholder="Search…"
+            classes={{
+              input: classes.searchInput,
+              root: classes.searchRoot
+            }}
+          />
         </div>
       </Toolbar>
     </AppBar>
@@ -120,15 +122,14 @@ Header.propTypes = {
     menuButton: PropTypes.object,
     /** Root element styles */
     root: PropTypes.object,
-    /** Search styles */
-    search: PropTypes.shape({
-      /** Search icon styles */
-      icon: PropTypes.object,
-      /** Search input styles object */
-      input: PropTypes.object,
-      /** Search wrapper styles */
-      wrapper: PropTypes.object
-    }),
+    /** Search icon styles */
+    searchIcon: PropTypes.object,
+    /** Search input styles object */
+    searchInput: PropTypes.object,
+    /** Search input root styles */
+    searchRoot: PropTypes.object,
+    /** Search wrapper styles */
+    searchWrapper: PropTypes.object,
     /** Title styles */
     title: PropTypes.object
   }).isRequired,
