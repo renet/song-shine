@@ -106,7 +106,17 @@ const SideMenu = ({ classes, open, toggle }) => (
 );
 
 SideMenu.propTypes = {
-  classes: PropTypes.object.isRequired
+  /** Styles */
+  classes: PropTypes.shape({
+    /** Menu list styles */
+    list: PropTypes.object,
+    /** Title styles */
+    title: PropTypes.object
+  }).isRequired,
+  /** Open state */
+  open: PropTypes.object.isRequired,
+  /** Function to set the menu visibility */
+  toggle: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(SideMenu);

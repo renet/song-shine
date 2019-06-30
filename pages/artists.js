@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Link from "next/link";
 import Grid from "@material-ui/core/Grid";
@@ -39,7 +40,7 @@ function renderList(artists) {
   ));
 }
 
-const App = ({ artists }) => (
+const Artists = ({ artists }) => (
   <Layout title="Artists">
     <Grid item xs={12} sm={8}>
       <List>{renderList(artists)}</List>
@@ -47,7 +48,19 @@ const App = ({ artists }) => (
   </Layout>
 );
 
+Artists.propTypes = {
+  /** List of artists */
+  artists: PropTypes.arrayOf(
+    PropTypes.shape({
+      /** Artist ID */
+      id: PropTypes.string.isRequired,
+      /** Artist name */
+      name: PropTypes.string.isRequired
+    })
+  ).isRequired
+};
+
 export default connect((state, props) => ({
   ...props,
   artists: getAllArtists(state)
-}))(App);
+}))(Artists);

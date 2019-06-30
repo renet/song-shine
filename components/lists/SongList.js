@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import Link from "next/link";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -41,5 +42,19 @@ const SongList = ({ songs }) => (
     ))}
   </List>
 );
+
+SongList.propTypes = {
+  /** List of songs */
+  songs: PropTypes.arrayOf(
+    PropTypes.shape({
+      /** List of song artists */
+      artists: PropTypes.shape().isRequired,
+      /** Song ID */
+      id: PropTypes.string.isRequired,
+      /** Song title */
+      title: PropTypes.string.isRequired
+    })
+  ).isRequired
+};
 
 export default SongList;

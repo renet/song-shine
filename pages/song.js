@@ -1,4 +1,5 @@
 import { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
@@ -28,7 +29,7 @@ const styles = theme => ({
   }
 });
 
-class EditSong extends Component {
+class Song extends Component {
   static async getInitialProps({ store, query }) {
     const { id } = query;
 
@@ -104,7 +105,41 @@ class EditSong extends Component {
   }
 }
 
+Song.propTypes = {
+  /** Styles */
+  classes: PropTypes.shape({
+    /** Single artist styles */
+    artist: PropTypes.object.isRequired,
+    /** Artist list style */
+    artists: PropTypes.object.isRequired,
+    /** Grid style */
+    grid: PropTypes.object.isRequired,
+    /** Lyrics style */
+    text: PropTypes.object.isRequired
+  }).isRequired,
+  /** Current song ID */
+  id: PropTypes.string.isRequired,
+  /** Current song */
+  song: PropTypes.shape({
+    /** Song artists */
+    artists: PropTypes.shape({
+      /** Artist name */
+      name: PropTypes.string.isRequired
+    }).isRequired,
+    /** Song lyrics */
+    text,
+    /** Song title */
+    title,
+    /** Publication year of the song */
+    year
+  }).isRequired,
+  /** Function to update current song details in state */
+  updateSongDetails: PropTypes.func.isRequired,
+  /** Function to update the current song text in state */
+  updateSongText: PropTypes.func.isRequired
+};
+
 export default connect(
   (state, props) => ({ ...props, song: getSelectedSong(state) }),
   { ...musicActions }
-)(withStyles(styles)(EditSong));
+)(withStyles(styles)(Song));

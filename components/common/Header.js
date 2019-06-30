@@ -29,43 +29,47 @@ const styles = theme => ({
     }
   },
   search: {
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25)
+    wrapper: {
+      position: "relative",
+      borderRadius: theme.shape.borderRadius,
+      backgroundColor: fade(theme.palette.common.white, 0.15),
+      "&:hover": {
+        backgroundColor: fade(theme.palette.common.white, 0.25)
+      },
+      marginLeft: 0,
+      width: "100%",
+      [theme.breakpoints.up("sm")]: {
+        marginLeft: theme.spacing.unit,
+        width: "auto"
+      }
     },
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing.unit,
-      width: "auto"
-    }
-  },
-  searchIcon: {
-    width: theme.spacing.unit * 9,
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  inputRoot: {
-    color: "inherit",
-    width: "100%"
-  },
-  inputInput: {
-    paddingTop: theme.spacing.unit,
-    paddingRight: theme.spacing.unit,
-    paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit * 10,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: 120,
-      "&:focus": {
-        width: 200
+    icon: {
+      width: theme.spacing.unit * 9,
+      height: "100%",
+      position: "absolute",
+      pointerEvents: "none",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    },
+    input: {
+      root: {
+        color: "inherit",
+        width: "100%"
+      },
+      input: {
+        paddingTop: theme.spacing.unit,
+        paddingRight: theme.spacing.unit,
+        paddingBottom: theme.spacing.unit,
+        paddingLeft: theme.spacing.unit * 10,
+        transition: theme.transitions.create("width"),
+        width: "100%",
+        [theme.breakpoints.up("sm")]: {
+          width: 120,
+          "&:focus": {
+            width: 200
+          }
+        }
       }
     }
   }
@@ -96,17 +100,11 @@ const Header = ({ classes, title, toggleMenu }) => (
           </Typography>
         </Link>
         <div className={classes.grow} />
-        <div className={classes.search}>
-          <div className={classes.searchIcon}>
+        <div className={classes.search.wrapper}>
+          <div className={classes.search.icon}>
             <SearchIcon />
           </div>
-          <InputBase
-            placeholder="Search…"
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput
-            }}
-          />
+          <InputBase placeholder="Search…" classes={classes.search.input} />
         </div>
       </Toolbar>
     </AppBar>
@@ -114,7 +112,30 @@ const Header = ({ classes, title, toggleMenu }) => (
 );
 
 Header.propTypes = {
-  classes: PropTypes.object.isRequired
+  /** Styles */
+  classes: PropTypes.shape({
+    /** Grow area styles */
+    grow: PropTypes.object,
+    /** Menu button styles */
+    menuButton: PropTypes.object,
+    /** Root element styles */
+    root: PropTypes.object,
+    /** Search styles */
+    search: PropTypes.shape({
+      /** Search icon styles */
+      icon: PropTypes.object,
+      /** Search input styles object */
+      input: PropTypes.object,
+      /** Search wrapper styles */
+      wrapper: PropTypes.object
+    }),
+    /** Title styles */
+    title: PropTypes.object
+  }).isRequired,
+  /** Title to display in the middle of the header */
+  title: PropTypes.string.isRequired,
+  /** Function to set the menu visibility */
+  toggleMenu: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(Header);

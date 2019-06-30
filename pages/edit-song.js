@@ -1,4 +1,5 @@
 import { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Router from "next/router";
 import uuidv4 from "uuid/v4";
@@ -192,6 +193,40 @@ class EditSong extends Component {
     );
   }
 }
+
+EditSong.propTypes = {
+  /** List of all available artists */
+  allArtists: PropTypes.arrayOf(
+    PropTypes.shape({
+      /** Artist ID */
+      value: PropTypes.string.isRequired,
+      /** Artist name */
+      label: PropTypes.string.isRequired
+    })
+  ).isRequired,
+  /** Current song */
+  song: PropTypes.shape({
+    /** List of song artists */
+    artists: PropTypes.arrayOf(
+      PropTypes.shape({
+        /** Artist ID */
+        id: PropTypes.string.isRequired,
+        /** Artist name */
+        name: PropTypes.string.isRequired
+      })
+    ).isRequired,
+    /** Song lyrics */
+    text: PropTypes.string.isRequired,
+    /** Song title */
+    title: PropTypes.string.isRequired,
+    /** Publication year of the song */
+    year: propTypes.number.isRequired
+  }).isRequired,
+  /** Song ID */
+  id: PropTypes.string.isRequired,
+  /** Function that updates a song in store */
+  updateArtist: PropTypes.func.isRequired
+};
 
 export default connect(
   (state, props) => ({

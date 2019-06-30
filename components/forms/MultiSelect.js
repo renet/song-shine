@@ -226,8 +226,40 @@ const MultiSelect = ({
 };
 
 MultiSelect.propTypes = {
-  /** Page content */
-  children: PropTypes.node
+  /** Styles object for Creatable component */
+  classes: PropTypes.object.isRequired,
+  /** Function for formatting the label for adding a new value */
+  formatCreateLabel: PropTypes.func.isRequired,
+  /** Main input label */
+  label: PropTypes.string.isRequired,
+  /** Function to create the message shown, when no options are available */
+  noOptionsMessage: PropTypes.func,
+  /** Callback to call on value change */
+  onChange: PropTypes.func,
+  /** Callback to call when a new option is created */
+  onCreateOption: PropTypes.func,
+  /** List of available options */
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      /** Option value */
+      value: PropTypes.string.isRequired,
+      /** Option label, if different from value */
+      label: PropTypes.string
+    })
+  ),
+  /** Placeholder text */
+  placeholder: PropTypes.string,
+  /** Styles theme */
+  theme: PropTypes.object.isRequired,
+  /** List of currently selected options */
+  value: PropTypes.arrayOf(
+    PropTypes.shape({
+      /** Option value */
+      value: PropTypes.string.isRequired,
+      /** Option label, if different from value */
+      label: PropTypes.string
+    })
+  )
 };
 
 export default withStyles(styles, { withTheme: true })(MultiSelect);

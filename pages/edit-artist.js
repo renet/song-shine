@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Component } from "react";
 import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
@@ -73,10 +74,21 @@ class EditArtist extends Component {
   }
 }
 
+EditArtist.propTypes = {
+  /** Current artist */
+  artist: PropTypes.shape({
+    /** Artist name */
+    name: PropTypes.string.isRequired
+  }).isRequired,
+  /** Artist ID */
+  id: PropTypes.string.isRequired,
+  /** Function that updates an artist in store */
+  updateArtist: PropTypes.func.isRequired
+};
+
 export default connect(
   (state, props) => ({
     ...props,
-    theme: state.page.theme,
     artist: getSelectedArtist(state)
   }),
   { ...musicActions }

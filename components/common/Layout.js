@@ -50,7 +50,16 @@ const Layout = ({ children, classes, title }) => {
 
 Layout.propTypes = {
   /** Page content */
-  children: PropTypes.node
+  children: PropTypes.node,
+  /** Styles */
+  classes: PropTypes.shape({
+    /** Fab button styles */
+    fab: PropTypes.object.isRequired,
+    /** Grid container styles */
+    grid: PropTypes.object.isRequired
+  }).isRequired,
+  /** Page title */
+  title: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(Layout);

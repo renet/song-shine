@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import App, { Container } from "next/app";
 import getConfig from "next/config";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
@@ -60,5 +61,14 @@ class MyApp extends App {
     );
   }
 }
+
+MyApp.propTypes = {
+  /** Page component */
+  Component: PropTypes.node.isRequired,
+  /** Page props */
+  pageProps: PropTypes.object.isRequired,
+  /** Redux store */
+  store: PropTypes.object
+};
 
 export default withReduxStore(MyApp);

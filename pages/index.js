@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Link from "next/link";
 import { withStyles } from "@material-ui/core";
@@ -16,7 +17,7 @@ const styles = {
   }
 };
 
-const App = ({ classes }) => (
+const Index = ({ classes }) => (
   <Layout title="Welcome to Song Shine">
     <Grid item xs={12} sm={6} lg={4}>
       <Link href="/songs">
@@ -68,7 +69,15 @@ const App = ({ classes }) => (
   </Layout>
 );
 
+Index.propTypes = {
+  /** Styles */
+  classes: PropTypes.shape({
+    /** Card media styles */
+    media: PropTypes.object.isRequired
+  }).isRequired
+};
+
 export default connect(
   ({ page }, props) => ({ ...props, theme: page.theme }),
   { ...pageActions }
-)(withStyles(styles)(App));
+)(withStyles(styles)(Index));
