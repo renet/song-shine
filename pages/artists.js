@@ -13,7 +13,7 @@ import FaceIcon from "@material-ui/icons/Face";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import Layout from "../components/common/Layout";
-import { getAllArtists } from "../store/selectors/musicSelectors";
+import { getSortedArtists } from "../store/selectors/musicSelectors";
 
 function renderList(artists) {
   return artists.map(({ id, name }) => (
@@ -62,5 +62,5 @@ Artists.propTypes = {
 
 export default connect((state, props) => ({
   ...props,
-  artists: getAllArtists(state)
+  artists: getSortedArtists(state)
 }))(Artists);

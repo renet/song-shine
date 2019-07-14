@@ -117,21 +117,21 @@ Header.propTypes = {
   /** Styles */
   classes: PropTypes.shape({
     /** Grow area styles */
-    grow: PropTypes.object,
+    grow: PropTypes.string,
     /** Menu button styles */
-    menuButton: PropTypes.object,
+    menuButton: PropTypes.string,
     /** Root element styles */
-    root: PropTypes.object,
+    root: PropTypes.string,
     /** Search icon styles */
-    searchIcon: PropTypes.object,
+    searchIcon: PropTypes.string,
     /** Search input styles object */
-    searchInput: PropTypes.object,
+    searchInput: PropTypes.string,
     /** Search input root styles */
-    searchRoot: PropTypes.object,
+    searchRoot: PropTypes.string,
     /** Search wrapper styles */
-    searchWrapper: PropTypes.object,
+    searchWrapper: PropTypes.string,
     /** Title styles */
-    title: PropTypes.object
+    title: PropTypes.string
   }).isRequired,
   /** Title to display in the middle of the header */
   title: PropTypes.string.isRequired,

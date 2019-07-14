@@ -48,7 +48,7 @@ SongList.propTypes = {
   songs: PropTypes.arrayOf(
     PropTypes.shape({
       /** List of song artists */
-      artists: PropTypes.shape().isRequired,
+      artists: PropTypes.array.isRequired,
       /** Song ID */
       id: PropTypes.string.isRequired,
       /** Song title */

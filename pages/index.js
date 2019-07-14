@@ -73,7 +73,7 @@ Index.propTypes = {
   /** Styles */
   classes: PropTypes.shape({
     /** Card media styles */
-    media: PropTypes.object.isRequired
+    media: PropTypes.string.isRequired
   }).isRequired
 };
 

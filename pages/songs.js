@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
-import { getAllSongs } from "../store/selectors/musicSelectors";
+import { getSortedSongs } from "../store/selectors/musicSelectors";
 import Layout from "../components/common/Layout";
 import SongList from "../components/lists/SongList";
 
@@ -18,7 +18,7 @@ Songs.propTypes = {
   songs: PropTypes.arrayOf(
     PropTypes.shape({
       /** List of song artists */
-      artists: PropTypes.shape().isRequired,
+      artists: PropTypes.array.isRequired,
       /** Song ID */
       id: PropTypes.string.isRequired,
       /** Song title */
@@ -29,5 +29,5 @@ Songs.propTypes = {
 
 export default connect((state, props) => ({
   ...props,
-  songs: getAllSongs(state)
+  songs: getSortedSongs(state)
 }))(Songs);

@@ -11,7 +11,7 @@ import {
 import Layout from "../components/common/Layout";
 import SongList from "../components/lists/SongList";
 
-class EditArtist extends Component {
+class Artist extends Component {
   static async getInitialProps({ store, query }) {
     const { id } = query;
 
@@ -34,7 +34,7 @@ class EditArtist extends Component {
   }
 }
 
-EditArtist.propTypes = {
+Artist.propTypes = {
   /** Artist */
   artist: PropTypes.shape({
     name: PropTypes.string.isRequired
@@ -43,7 +43,7 @@ EditArtist.propTypes = {
   songs: PropTypes.arrayOf(
     PropTypes.shape({
       /** List of song artists */
-      artists: PropTypes.shape().isRequired,
+      artists: PropTypes.array.isRequired,
       /** Song ID */
       id: PropTypes.string.isRequired,
       /** Song title */
@@ -59,4 +59,4 @@ export default connect(
     songs: getSongsBySelectedArtist(state)
   }),
   { ...musicActions }
-)(EditArtist);
+)(Artist);

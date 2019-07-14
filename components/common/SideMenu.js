@@ -109,14 +109,14 @@ SideMenu.propTypes = {
   /** Styles */
   classes: PropTypes.shape({
     /** Menu list styles */
-    list: PropTypes.object,
+    list: PropTypes.string,
     /** Title styles */
-    title: PropTypes.object
+    title: PropTypes.string
   }).isRequired,
   /** Open state */
-  open: PropTypes.object.isRequired,
+  open: PropTypes.bool.isRequired,
   /** Function to set the menu visibility */
-  toggle: PropTypes.object.isRequired
+  toggle: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(SideMenu);

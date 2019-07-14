@@ -92,6 +92,7 @@ class Song extends Component {
                 className={classes.artist}
                 component="li"
                 icon={<FaceIcon />}
+                key={name}
                 label={name}
               />
             ))}
@@ -109,23 +110,25 @@ Song.propTypes = {
   /** Styles */
   classes: PropTypes.shape({
     /** Single artist styles */
-    artist: PropTypes.object.isRequired,
+    artist: PropTypes.string.isRequired,
     /** Artist list style */
-    artists: PropTypes.object.isRequired,
+    artists: PropTypes.string.isRequired,
     /** Grid style */
-    grid: PropTypes.object.isRequired,
+    grid: PropTypes.string.isRequired,
     /** Lyrics style */
-    text: PropTypes.object.isRequired
+    text: PropTypes.string.isRequired
   }).isRequired,
   /** Current song ID */
   id: PropTypes.string.isRequired,
   /** Current song */
   song: PropTypes.shape({
     /** Song artists */
-    artists: PropTypes.shape({
-      /** Artist name */
-      name: PropTypes.string.isRequired
-    }).isRequired,
+    artists: PropTypes.arrayOf(
+      PropTypes.shape({
+        /** Artist name */
+        name: PropTypes.string.isRequired
+      })
+    ).isRequired,
     /** Song lyrics */
     text: PropTypes.string.isRequired,
     /** Song title */

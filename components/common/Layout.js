@@ -54,9 +54,9 @@ Layout.propTypes = {
   /** Styles */
   classes: PropTypes.shape({
     /** Fab button styles */
-    fab: PropTypes.object.isRequired,
+    fab: PropTypes.string.isRequired,
     /** Grid container styles */
-    grid: PropTypes.object.isRequired
+    grid: PropTypes.string.isRequired
   }).isRequired,
   /** Page title */
   title: PropTypes.string.isRequired
