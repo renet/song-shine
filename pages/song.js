@@ -1,6 +1,7 @@
 import { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import Link from "next/link";
 import { withStyles } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -14,6 +15,8 @@ import Layout from "../components/common/Layout";
 
 const styles = theme => ({
   artist: {
+    display: "inline",
+
     "&:not(:last-child)": {
       marginRight: theme.spacing.unit
     }
@@ -87,14 +90,12 @@ class Song extends Component {
             {title} ({year})
           </Typography>
           <List className={classes.artists}>
-            {artists.map(({ name }) => (
-              <Chip
-                className={classes.artist}
-                component="li"
-                icon={<FaceIcon />}
-                key={name}
-                label={name}
-              />
+            {artists.map(({ id, name }) => (
+              <li className={classes.artist} key={id}>
+                <Link href={`/artist?id=${id}`} as={`/artist/${id}`}>
+                  <Chip component="a" icon={<FaceIcon />} label={name} />
+                </Link>
+              </li>
             ))}
           </List>
           <Typography component="p" className={classes.text}>
